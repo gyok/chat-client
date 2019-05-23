@@ -15,7 +15,7 @@ void ChatClientModel::Init(ChatClientController* controller) {
 }
 
 void ChatClientModel::showMsg() {
-    _controller->ShowMsg(std::string(_buff, _alreadyRead));
+    _controller->ShowMsg(std::string(_buff, _alreadyRead - 1));
 }
 
 bool ChatClientModel::Run() {
@@ -23,14 +23,18 @@ bool ChatClientModel::Run() {
         _socket.connect(_ep);
         login();
         getMsg();
-
-        return true;
     }
     catch(boost::system::system_error &) {
         std::cout << "server skipped" << std::endl;
+        return false;
     }
 
-    return false;
+    while (true) {
+        if (_socket.available()) {
+            getMsg();
+        }
+    }
+    return true;
 }
 
 void ChatClientModel::login() {

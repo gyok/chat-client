@@ -15,7 +15,6 @@ set(HEADER_VIEW chatClientView.h)
 set(HEADER_CONTROLLER chatClientController.h)
 
 find_package(Boost COMPONENTS ${BOOST_COMPONENTS} REQUIRED_FILES)
-find_package (Threads)
 include_directories(${Boost_INCLUDE_DIRS})
 
 add_library(controller STATIC ${SOURCE_CONTROLLER} ${HEADER_CONTROLLER})
@@ -24,4 +23,4 @@ add_library(view STATIC ${SOURCE_VIEW} ${HEADER_VIEW})
 
 add_executable(${PROJECT_NAME} "main.cpp")
 
-target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} controller model view ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} controller model view Boost::thread)
