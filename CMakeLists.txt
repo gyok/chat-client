@@ -5,7 +5,8 @@ project(chatClient)
 set(Boost_USE_STATIC_LIBS ON)
 set(BOOST_COMPONENTS
     asio
-    thread)
+    thread
+    chrono)
 
 set(SOURCE_MODEL chatClientModel.cpp)
 set(SOURCE_VIEW chatClientView.cpp)
@@ -23,4 +24,4 @@ add_library(view STATIC ${SOURCE_VIEW} ${HEADER_VIEW})
 
 add_executable(${PROJECT_NAME} "main.cpp")
 
-target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} controller model view Boost::thread)
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} controller model view Boost::thread Boost::chrono)

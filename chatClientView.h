@@ -13,7 +13,7 @@ class ChatClientView {
 public:
     void DrawMsg(string);
     void Init(ChatClientController*);
-    void Run();
+    bool Run();
     AuthData Authenticate();
 
 private:

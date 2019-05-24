@@ -7,7 +7,7 @@ ChatClientModel::ChatClientModel()
 {}
 
 void ChatClientModel::SendMsg(std::string msg) {
-    _socket.write_some(buffer(msg));
+    _socket.write_some(buffer(msg + "\n"));
 }
 
 void ChatClientModel::Init(ChatClientController* controller) {
@@ -30,6 +30,7 @@ bool ChatClientModel::Run() {
     }
 
     while (true) {
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(100));
         if (_socket.available()) {
             getMsg();
         }

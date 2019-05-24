@@ -2,6 +2,7 @@
 #define CHATCLIENTCONTROLLER_H
 
 #include <string>
+#include <boost/thread.hpp>
 #include "chatClientModel.h"
 #include "chatClientView.h"
 using namespace std;
