@@ -7,7 +7,11 @@ ChatClientModel::ChatClientModel()
 {}
 
 void ChatClientModel::SendMsg(std::string msg) {
-    _socket.write_some(buffer(msg + "\n"));
+    try {
+        _socket.write_some(buffer(msg + "\n"));
+    } catch(boost::system::system_error &) {
+        std::cout << "client closed" << std::endl;
+    }
 }
 
 void ChatClientModel::Init(ChatClientController* controller) {
